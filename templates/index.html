@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>CINEVERSE — The Art of Cinema</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="menu">
+    <div class="logo">CINEVERSE</div>
+    <nav>
+        <a href="#">Início</a>
+        <a href="#top10">Seleção da Semana</a>
+        <a href="#catalogo">Obras</a>
+        <a href="#" onclick="abrirFavoritos()">Minha Coleção</a>
+        <button onclick="toggleTema()">🌙</button>
+    </nav>
+</header>
+
+<section class="hero" style="background-image:url('https://image.tmdb.org/t/p/original{{ destaque.backdrop_path }}')">
+    <div class="overlay">
+        <h1>{{ destaque.title }}</h1>
+        <p>{{ destaque.overview[:200] }}...</p>
+        <a href="/filme/{{ destaque.id }}" class="btn-gold">Explorar Obra</a>
+    </div>
+</section>
+
+<section id="top10" class="top10">
+    <h2>🏆 Seleção da Semana</h2>
+    <div class="top-container">
+        {% for filme in top10 %}
+        <div class="top-card">
+            <span class="badge">#{{ loop.index }}</span>
+            <a href="/filme/{{ filme.id }}">
+                <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="busca">
+    <input type="text" id="buscaInput" placeholder="Buscar obras cinematográficas...">
+    <button onclick="novaBusca()">Buscar</button>
+</section>
+
+<section id="catalogo">
+    <h2>🎞 Obras</h2>
+
+    <div class="filtros">
+        {% for genero in generos %}
+        <label>
+            <input type="checkbox" value="{{ genero.id }}"> {{ genero.name }}
+        </label>
+        {% endfor %}
+    </div>
+
+    <div id="listaFilmes" class="grid"></div>
+</section>
+
+<footer>
+    Celebrando o cinema, quadro a quadro.
+</footer>
+
+<script>
+let pagina = 1;
+let carregando = false;
+
+function novaBusca(){
+    pagina = 1;
+    document.getElementById("listaFilmes").innerHTML = "";
+    carregarFilmes();
+}
+
+function pegarGeneros(){
+    return Array.from(document.querySelectorAll(".filtros input:checked"))
+        .map(cb => cb.value).join(",");
+}
+
+function carregarFilmes(){
+    if(carregando) return;
+    carregando = true;
+
+    fetch("/buscar_ajax",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            pagina:pagina,
+            generos:pegarGeneros(),
+            busca:document.getElementById("buscaInput").value
+        })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        const container = document.getElementById("listaFilmes");
+
+        data.forEach(filme=>{
+            if(!filme.poster_path) return;
+
+            const card = document.createElement("div");
+            card.className="card";
+            card.innerHTML=`
+                <a href="/filme/${filme.id}">
+                    <div class="nota">${filme.vote_average}</div>
+                    <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}">
+                    <h3>${filme.title}</h3>
+                </a>
+                <div class="fav" onclick="favoritar(${filme.id}, '${filme.title}')">❤</div>
+            `;
+            container.appendChild(card);
+        });
+
+        pagina++;
+        carregando=false;
+    });
+}
+
+window.addEventListener("scroll", ()=>{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 200){
+        carregarFilmes();
+    }
+});
+
+function favoritar(id,titulo){
+    let fav = JSON.parse(localStorage.getItem("favoritos")) || [];
+    fav.push({id,titulo});
+    localStorage.setItem("favoritos",JSON.stringify(fav));
+    alert("Adicionado à Minha Coleção!");
+}
+
+function abrirFavoritos(){
+    alert(localStorage.getItem("favoritos") || "Nenhum favorito ainda.");
+}
+
+function toggleTema(){
+    document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>

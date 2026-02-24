@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ filme.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<a href="javascript:history.back()" class="voltar">⬅ Voltar</a>
+
+<div class="detalhe-container">
+
+    <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
+
+    <div class="detalhes">
+        <h1>{{ filme.title }}</h1>
+
+        <p><strong>📅 Ano:</strong> {{ filme.release_date }}</p>
+        <p><strong>⭐ Nota:</strong> {{ filme.vote_average }}</p>
+        <p><strong>⏳ Duração:</strong> {{ filme.runtime }} min</p>
+
+        <p><strong>🎭 Gêneros:</strong>
+            {% for g in filme.genres %}
+                {{ g.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+        <p><strong>📝 Sinopse:</strong></p>
+        <p>{{ filme.overview }}</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+/* ===============================
+   🎬 CINEVERSE — The Art of Cinema
+   Estética Oscar | Preto & Dourado
+================================= */
+
+:root {
+    --bg-primary: #0b0b0b;
+    --bg-secondary: #141414;
+    --gold-primary: #d4af37;
+    --gold-light: #f5d06f;
+    --text-primary: #ffffff;
+    --text-secondary: #c9c9c9;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+}
+
+/* ===============================
+   🏛 MENU
+================================= */
+
+.menu {
+    position: fixed;
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 11, 11, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold-primary);
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--gold-primary);
+}
+
+nav button {
+    background: none;
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-primary);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav button:hover {
+    background: var(--gold-primary);
+    color: #000;
+}
+
+/* ===============================
+   🎬 HERO
+================================= */
+
+.hero {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(11,11,11,1));
+}
+
+.overlay {
+    position: relative;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+}
+
+.overlay h1 {
+    font-size: 48px;
+    color: var(--gold-primary);
+    margin-bottom: 20px;
+}
+
+.overlay p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-gold {
+    background: var(--gold-primary);
+    color: #000;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-gold:hover {
+    background: var(--gold-light);
+}
+
+/* ===============================
+   🏆 TOP 10
+================================= */
+
+.top10 {
+    padding: 100px 60px 60px;
+}
+
+.top10 h2 {
+    color: var(--gold-primary);
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.top-container {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.top-card {
+    position: relative;
+    min-width: 180px;
+    transition: 0.3s;
+}
+
+.top-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.top-card:hover {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--gold-primary);
+    color: #000;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* ===============================
+   🔎 BUSCA
+================================= */
+
+.busca {
+    padding: 40px 60px;
+    display: flex;
+    gap: 15px;
+}
+
+.busca input {
+    flex: 1;
+    padding: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--gold-primary);
+    color: white;
+}
+
+.busca button {
+    background: var(--gold-primary);
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+/* ===============================
+   🎭 FILTROS
+================================= */
+
+.filtros {
+    padding: 20px 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filtros label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filtros input {
+    margin-right: 5px;
+}
+
+/* ===============================
+   🎞 GRID FILMES
+================================= */
+
+.grid {
+    padding: 40px 60px 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    position: relative;
+    transition: 0.4s ease;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.nota {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--gold-primary);
+    color: #000;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 50%;
+}
+
+.fav {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 18px;
+    color: var(--gold-primary);
+    cursor: pointer;
+}
+
+/* ===============================
+   📜 FOOTER
+================================= */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid rgba(212,175,55,0.3);
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ===============================
+   🌙 LIGHT MODE
+================================= */
+
+body.light {
+    background: #f4f4f4;
+    color: #000;
+}
+
+body.light .menu {
+    background: #ffffff;
+    border-bottom: 1px solid var(--gold-primary);
+}
+
+body.light nav a {
+    color: #000;
+}
+
+body.light .overlay h1 {
+    color: #000;
+}
