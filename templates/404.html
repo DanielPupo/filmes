@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CineFlix | Página não encontrada</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">CINEFLIX</div>
+    <ul class="nav-links">
+        <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top10</a></li>
+        <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
+    </ul>
+    <div class="search-box">
+        <form action="/buscar" method="get">
+            <input type="text" name="q" placeholder="Buscar filmes...">
+        </form>
+    </div>
+</nav>
+
+<section class="page-content" style="text-align: center; padding: 4rem 2rem;">
+    <h1 style="font-size: 6rem; color: #E50914;">404</h1>
+    <p style="font-size: 1.5rem; margin-bottom: 2rem;">Oops! Página não encontrada.</p>
+    <p>O filme que você procura pode ter saído de cartaz ou o link está quebrado.</p>
+    <a href="/" class="btn-red" style="margin-top: 2rem; display: inline-block;">Voltar ao catálogo</a>
+</section>
+
+</body>
+</html>

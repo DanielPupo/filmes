@@ -22,7 +22,7 @@ ul {
     list-style: none;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR (NOVO LAYOUT) ===== */
 .navbar {
     display: flex;
     align-items: center;
@@ -82,22 +82,18 @@ ul {
     color: #aaa;
 }
 
-/* ===== SEÇÕES GERAIS ===== */
-section {
+/* ===== TOP 10 HORIZONTAL ===== */
+.top10 {
+    margin-top: -1rem;
     padding: 2rem 4%;
 }
 
-h2 {
+.top10 h2 {
     font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
     border-left: 4px solid #E50914;
     padding-left: 1rem;
-}
-
-/* ===== TOP 10 HORIZONTAL (INDEX) ===== */
-.top10 {
-    margin-top: -1rem;
 }
 
 .top-container {
@@ -179,7 +175,19 @@ h2 {
     color: #ddd;
 }
 
-/* ===== CATÁLOGO EM GRID ===== */
+/* ===== GRID DE FILMES ===== */
+.catalogo {
+    padding: 2rem 4%;
+}
+
+.catalogo h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #E50914;
+    padding-left: 1rem;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -265,7 +273,15 @@ h2 {
     width: 100%;
 }
 
-/* ===== PÁGINA DE DETALHES DO FILME ===== */
+/* ===== INFINITE SCROLL LOADING ===== */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+    font-size: 1.2rem;
+}
+
+/* ===== PÁGINA DE DETALHES ===== */
 .hero-detail {
     position: relative;
     background-size: cover;
@@ -411,7 +427,7 @@ h2 {
     gap: 0.5rem;
 }
 
-/* ===== PÁGINA TOP 10 VERTICAL ===== */
+/* ===== TOP 10 VERTICAL ===== */
 .page-content {
     padding: 2rem 4%;
 }
@@ -499,7 +515,7 @@ h2 {
     color: #aaa;
 }
 
-/* ===== PÁGINA FAVORITOS ===== */
+/* ===== FAVORITOS ===== */
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;

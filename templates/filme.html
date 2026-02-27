@@ -8,10 +8,10 @@
 <body>
 
 <nav class="navbar">
-    <div class="brand">CineFlix</div>
+    <div class="brand">CINEFLIX</div>
     <ul class="nav-links">
         <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
-        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top 10</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top10</a></li>
         <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
     </ul>
     <div class="search-box">
@@ -23,18 +23,20 @@
 
 <section class="hero-detail" style="background-image: url('https://image.tmdb.org/t/p/original{{ filme.backdrop_path }}');">
     <div class="hero-content">
-        <a href="/" class="btn-back">← Voltar</a>
+        <a href="javascript:history.back()" class="btn-back">← Voltar</a>
         
         <div class="hero-header-info">
             <h1>{{ filme.title }}</h1>
             <div class="tags-row">
                 <span class="rating-tag">⭐ {{ filme.vote_average }}</span>
-                <span>{{ filme.release_date[:4] }}</span>
-                <span>2h 15min</span>
+                <span>{{ filme.release_date[:4] if filme.release_date else 'N/A' }}</span>
+                <span>{{ filme.runtime }} min</span>
                 <span class="top-badge">TOP #4</span>
             </div>
             <div class="genres">
-                <span>Ação</span> <span>Ficção Científica</span>
+                {% for genre in filme.genres %}
+                <span>{{ genre.name }}</span>
+                {% endfor %}
             </div>
         </div>
 

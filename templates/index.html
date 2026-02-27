@@ -9,10 +9,10 @@
 <body>
 
 <nav class="navbar">
-    <div class="brand">CineFlix</div>
+    <div class="brand">CINEFLIX</div>
     <ul class="nav-links">
         <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
-        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top 10</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top10</a></li>
         <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
     </ul>
     <div class="search-box">
@@ -42,22 +42,78 @@
 
 <section class="catalogo">
     <h2>🎬 Catálogo Completo</h2>
-    <div class="grid">
+    <div class="grid" id="filmes-grid">
         {% for filme in filmes %}
         <div class="card">
             <a href="/filme/{{ filme.id }}">
                 <div class="nota-flutuante">{{ filme.vote_average }}</div>
-                <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
+                <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}" alt="{{ filme.title }}">
                 <div class="card-details">
                     <h3>{{ filme.title }}</h3>
-                    <p>{{ filme.release_date[:4] }} • Ação</p>
+                    <p>{{ filme.release_date[:4] if filme.release_date else 'N/A' }} • Ação</p>
                     <button class="btn-card-play">Assistir agora</button>
                 </div>
             </a>
         </div>
         {% endfor %}
     </div>
+    <div class="loading" id="loading" style="display: none;">Carregando mais filmes...</div>
 </section>
+
+<script>
+    let currentPage = 1;
+    let loading = false;
+    let endOfCatalog = false;
+
+    const grid = document.getElementById('filmes-grid');
+    const loadingDiv = document.getElementById('loading');
+
+    async function loadMoreMovies() {
+        if (loading || endOfCatalog) return;
+        loading = true;
+        loadingDiv.style.display = 'block';
+
+        const nextPage = currentPage + 1;
+        try {
+            const response = await fetch(`/carregar?page=${nextPage}`);
+            const newMovies = await response.json();
+            if (newMovies.length === 0) {
+                endOfCatalog = true;
+                loadingDiv.innerText = 'Não há mais filmes.';
+                return;
+            }
+            newMovies.forEach(filme => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <a href="/filme/${filme.id}">
+                        <div class="nota-flutuante">${filme.vote_average}</div>
+                        <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}">
+                        <div class="card-details">
+                            <h3>${filme.title}</h3>
+                            <p>${filme.release_date ? filme.release_date.slice(0,4) : 'N/A'} • Ação</p>
+                            <button class="btn-card-play">Assistir agora</button>
+                        </div>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+            currentPage = nextPage;
+        } catch (error) {
+            console.error('Erro ao carregar mais filmes:', error);
+            loadingDiv.innerText = 'Erro ao carregar. Tente novamente.';
+        } finally {
+            loading = false;
+            loadingDiv.style.display = 'none';
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+            loadMoreMovies();
+        }
+    });
+</script>
 
 </body>
 </html>
