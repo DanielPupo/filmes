@@ -2,8 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineFlix | Home</title>
+    <title>CineFlix | Meus Favoritos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -22,41 +21,33 @@
     </div>
 </nav>
 
-<section class="top10">
-    <h2>🔥 Top 10 da Semana</h2>
-    <div class="top-container">
-        {% for filme in top10 %}
-        <div class="top-card">
-            <span class="badge">#{{ loop.index }}</span>
-            <a href="/filme/{{ filme.id }}">
-                <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}" alt="{{ filme.title }}">
-                <div class="card-overlay">
-                    <p class="overlay-title">{{ filme.title }}</p>
-                    <p class="overlay-info">⭐ {{ filme.vote_average }} | {{ filme.release_date[:4] }}</p>
-                </div>
-            </a>
-        </div>
-        {% endfor %}
+<section class="page-content">
+    <div class="header-section">
+        <h1><span style="color: #E50914;">❤</span> Meus Favoritos</h1>
+        <p>Seus filmes favoritos em um só lugar</p>
     </div>
-</section>
 
-<section class="catalogo">
-    <h2>🎬 Catálogo Completo</h2>
+    {% if favoritos %}
     <div class="grid">
-        {% for filme in filmes %}
+        {% for filme in favoritos %}
         <div class="card">
             <a href="/filme/{{ filme.id }}">
-                <div class="nota-flutuante">{{ filme.vote_average }}</div>
                 <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
-                <div class="card-details">
+                <div class="card-info">
+                    <div class="nota">⭐ {{ filme.vote_average }}</div>
                     <h3>{{ filme.title }}</h3>
-                    <p>{{ filme.release_date[:4] }} • Ação</p>
-                    <button class="btn-card-play">Assistir agora</button>
+                    <p>{{ filme.release_date[:4] }}</p>
                 </div>
             </a>
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <div class="empty-state">
+        <p>Você ainda não adicionou nenhum filme aos favoritos.</p>
+        <a href="/" class="btn-red">Explorar Filmes</a>
+    </div>
+    {% endif %}
 </section>
 
 </body>

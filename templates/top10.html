@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CineFlix | Top 10</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">CineFlix</div>
+    <ul class="nav-links">
+        <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top 10</a></li>
+        <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
+    </ul>
+    <div class="search-box">
+        <form action="/buscar" method="get">
+            <input type="text" name="q" placeholder="Buscar filmes..." value="{{ request.args.get('q', '') }}">
+        </form>
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="header-section">
+        <h1>🔥 Top 10 Filmes</h1>
+        <p>Os filmes mais assistidos e bem avaliados da plataforma</p>
+    </div>
+
+    <div class="top-list-vertical">
+        {% for filme in top10 %}
+        <div class="top-item">
+            <span class="rank-number">#{{ loop.index }}</span>
+            <div class="card">
+                <a href="/filme/{{ filme.id }}">
+                    <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
+                    <div class="card-info">
+                        <div class="nota">⭐ {{ filme.vote_average }}</div>
+                        <h3>{{ filme.title }}</h3>
+                        <p>{{ filme.release_date[:4] }} • Destaque</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+</body>
+</html>

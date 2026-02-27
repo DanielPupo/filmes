@@ -2,35 +2,57 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{{ filme.title }}</title>
+    <title>{{ filme.title }} - CineFlix</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-<a href="javascript:history.back()" class="voltar">⬅ Voltar</a>
-
-<div class="detalhe-container">
-
-    <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}">
-
-    <div class="detalhes">
-        <h1>{{ filme.title }}</h1>
-
-        <p><strong>📅 Ano:</strong> {{ filme.release_date }}</p>
-        <p><strong>⭐ Nota:</strong> {{ filme.vote_average }}</p>
-        <p><strong>⏳ Duração:</strong> {{ filme.runtime }} min</p>
-
-        <p><strong>🎭 Gêneros:</strong>
-            {% for g in filme.genres %}
-                {{ g.name }}{% if not loop.last %}, {% endif %}
-            {% endfor %}
-        </p>
-
-        <p><strong>📝 Sinopse:</strong></p>
-        <p>{{ filme.overview }}</p>
+<nav class="navbar">
+    <div class="brand">CineFlix</div>
+    <ul class="nav-links">
+        <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top 10</a></li>
+        <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
+    </ul>
+    <div class="search-box">
+        <form action="/buscar" method="get">
+            <input type="text" name="q" placeholder="Buscar filmes..." value="{{ request.args.get('q', '') }}">
+        </form>
     </div>
+</nav>
 
-</div>
+<section class="hero-detail" style="background-image: url('https://image.tmdb.org/t/p/original{{ filme.backdrop_path }}');">
+    <div class="hero-content">
+        <a href="/" class="btn-back">← Voltar</a>
+        
+        <div class="hero-header-info">
+            <h1>{{ filme.title }}</h1>
+            <div class="tags-row">
+                <span class="rating-tag">⭐ {{ filme.vote_average }}</span>
+                <span>{{ filme.release_date[:4] }}</span>
+                <span>2h 15min</span>
+                <span class="top-badge">TOP #4</span>
+            </div>
+            <div class="genres">
+                <span>Ação</span> <span>Ficção Científica</span>
+            </div>
+        </div>
+
+        <p class="synopsis">{{ filme.overview }}</p>
+        
+        <div class="hero-actions">
+            <button class="btn-main-red">▶ Assistir Agora</button>
+            <button class="btn-outline">+ Adicionar à Fila</button>
+            <form action="{{ url_for('favoritar', id=filme.id) }}" method="POST" style="display: inline;">
+                {% if eh_favorito %}
+                    <button type="submit" class="btn-favorited">❤ Favoritado</button>
+                {% else %}
+                    <button type="submit" class="btn-outline">❤ Favoritar</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

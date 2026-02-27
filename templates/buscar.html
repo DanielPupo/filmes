@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CineFlix | Buscar: {{ query }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">CineFlix</div>
+    <ul class="nav-links">
+        <li><a href="/" {% if request.path == '/' %}class="active"{% endif %}>Filmes</a></li>
+        <li><a href="/top10" {% if request.path == '/top10' %}class="active"{% endif %}>Top 10</a></li>
+        <li><a href="/favoritos" {% if request.path == '/favoritos' %}class="active"{% endif %}>Favoritos</a></li>
+    </ul>
+    <div class="search-box">
+        <form action="/buscar" method="get">
+            <input type="text" name="q" placeholder="Buscar filmes..." value="{{ query }}">
+        </form>
+    </div>
+</nav>
+
+<section class="page-content">
+    <div class="header-section">
+        <h1>Resultados para "{{ query }}"</h1>
+        <p>{{ filmes|length }} filme(s) encontrado(s)</p>
+    </div>
+
+    {% if filmes %}
+    <div class="grid">
+        {% for filme in filmes %}
+        <div class="card">
+            <a href="/filme/{{ filme.id }}">
+                {% if filme.poster_path %}
+                    <img src="https://image.tmdb.org/t/p/w500{{ filme.poster_path }}" alt="{{ filme.title }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/500x750?text=Sem+Imagem" alt="Sem imagem">
+                {% endif %}
+                <div class="card-info">
+                    <div class="nota">⭐ {{ filme.vote_average }}</div>
+                    <h3>{{ filme.title }}</h3>
+                    <p>{{ filme.release_date[:4] if filme.release_date else 'N/A' }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>Nenhum filme encontrado para "{{ query }}".</p>
+        <a href="/" class="btn-red">Voltar ao catálogo</a>
+    </div>
+    {% endif %}
+</section>
+
+</body>
+</html>

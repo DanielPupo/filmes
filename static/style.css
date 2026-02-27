@@ -1,18 +1,5 @@
-/* ===============================
-   🎬 CINEVERSE — The Art of Cinema
-   Estética Oscar | Preto & Dourado
-================================= */
+/* static/style.css */
 
-:root {
-    --bg-primary: #0b0b0b;
-    --bg-secondary: #141414;
-    --gold-primary: #d4af37;
-    --gold-light: #f5d06f;
-    --text-primary: #ffffff;
-    --text-secondary: #c9c9c9;
-}
-
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -20,292 +7,578 @@
 }
 
 body {
-    font-family: 'Playfair Display', serif;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    scroll-behavior: smooth;
+    background-color: #141414;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
 }
 
-/* ===============================
-   🏛 MENU
-================================= */
+a {
+    text-decoration: none;
+    color: inherit;
+}
 
-.menu {
-    position: fixed;
-    width: 100%;
-    padding: 20px 60px;
+ul {
+    list-style: none;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: rgba(11, 11, 11, 0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    z-index: 1000;
+    justify-content: space-between;
+    padding: 1rem 4%;
+    background: linear-gradient(180deg, #000 0%, transparent 100%);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-wrap: wrap;
 }
 
-.logo {
-    font-size: 24px;
+.navbar .brand {
+    font-size: 1.8rem;
     font-weight: bold;
-    color: var(--gold-primary);
+    color: #E50914;
+    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-nav {
+.navbar .nav-links {
     display: flex;
-    align-items: center;
-    gap: 25px;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-nav a {
+.navbar .nav-links a {
+    color: #fff;
     text-decoration: none;
-    color: var(--text-primary);
-    font-size: 15px;
-    transition: 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-nav a:hover {
-    color: var(--gold-primary);
+.navbar .nav-links a:hover,
+.navbar .nav-links a.active {
+    color: #E50914;
 }
 
-nav button {
-    background: none;
-    border: 1px solid var(--gold-primary);
-    color: var(--gold-primary);
-    padding: 6px 12px;
-    cursor: pointer;
-    transition: 0.3s;
+.search-box form {
+    margin: 0;
 }
 
-nav button:hover {
-    background: var(--gold-primary);
-    color: #000;
+.search-box input {
+    background: rgba(0,0,0,0.7);
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    outline: none;
+    width: 250px;
 }
 
-/* ===============================
-   🎬 HERO
-================================= */
-
-.hero {
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.search-box input::placeholder {
+    color: #aaa;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(11,11,11,1));
+/* ===== SEÇÕES GERAIS ===== */
+section {
+    padding: 2rem 4%;
 }
 
-.overlay {
-    position: relative;
-    max-width: 800px;
-    text-align: center;
-    padding: 20px;
+h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #E50914;
+    padding-left: 1rem;
 }
 
-.overlay h1 {
-    font-size: 48px;
-    color: var(--gold-primary);
-    margin-bottom: 20px;
-}
-
-.overlay p {
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-
-.btn-gold {
-    background: var(--gold-primary);
-    color: #000;
-    padding: 12px 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-gold:hover {
-    background: var(--gold-light);
-}
-
-/* ===============================
-   🏆 TOP 10
-================================= */
-
+/* ===== TOP 10 HORIZONTAL (INDEX) ===== */
 .top10 {
-    padding: 100px 60px 60px;
-}
-
-.top10 h2 {
-    color: var(--gold-primary);
-    margin-bottom: 30px;
-    font-size: 28px;
+    margin-top: -1rem;
 }
 
 .top-container {
     display: flex;
-    gap: 25px;
+    gap: 1rem;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #E50914 #333;
+}
+
+.top-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.top-container::-webkit-scrollbar-thumb {
+    background: #E50914;
+    border-radius: 4px;
+}
+
+.top-container::-webkit-scrollbar-track {
+    background: #333;
 }
 
 .top-card {
     position: relative;
-    min-width: 180px;
-    transition: 0.3s;
-}
-
-.top-card img {
-    width: 100%;
-    border-radius: 6px;
+    min-width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
 }
 
 .top-card:hover {
     transform: scale(1.05);
 }
 
+.top-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .badge {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: var(--gold-primary);
-    color: #000;
-    padding: 5px 10px;
+    background: #E50914;
+    color: #fff;
     font-weight: bold;
-    font-size: 14px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 2;
 }
 
-/* ===============================
-   🔎 BUSCA
-================================= */
-
-.busca {
-    padding: 40px 60px;
-    display: flex;
-    gap: 15px;
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-.busca input {
-    flex: 1;
-    padding: 12px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--gold-primary);
-    color: white;
+.top-card:hover .card-overlay {
+    opacity: 1;
 }
 
-.busca button {
-    background: var(--gold-primary);
-    border: none;
-    padding: 12px 20px;
-    cursor: pointer;
+.overlay-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
 }
 
-/* ===============================
-   🎭 FILTROS
-================================= */
-
-.filtros {
-    padding: 20px 60px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+.overlay-info {
+    font-size: 0.8rem;
+    color: #ddd;
 }
 
-.filtros label {
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.filtros input {
-    margin-right: 5px;
-}
-
-/* ===============================
-   🎞 GRID FILMES
-================================= */
-
+/* ===== CATÁLOGO EM GRID ===== */
 .grid {
-    padding: 40px 60px 100px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
 }
 
 .card {
     position: relative;
-    transition: 0.4s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: #1f1f1f;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 5;
+}
+
+.card a {
+    display: block;
 }
 
 .card img {
     width: 100%;
-    border-radius: 6px;
+    height: auto;
+    display: block;
 }
 
-.card h3 {
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-}
-
-.nota {
+.nota-flutuante {
     position: absolute;
     top: 10px;
-    right: 10px;
-    background: var(--gold-primary);
-    color: #000;
-    padding: 6px 8px;
-    font-size: 12px;
-    border-radius: 50%;
+    left: 10px;
+    background: rgba(0,0,0,0.8);
+    color: #ffd700;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    z-index: 2;
 }
 
-.fav {
+.card-details {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 18px;
-    color: var(--gold-primary);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, #000);
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+}
+
+.card:hover .card-details {
+    transform: translateY(0);
+}
+
+.card-details h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-details p {
+    font-size: 0.8rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+.btn-card-play {
+    background: #E50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: bold;
     cursor: pointer;
+    width: 100%;
 }
 
-/* ===============================
-   📜 FOOTER
-================================= */
+/* ===== PÁGINA DE DETALHES DO FILME ===== */
+.hero-detail {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem 4%;
+}
 
-footer {
+.hero-detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.8) 20%, transparent 80%),
+                linear-gradient(0deg, #141414 0%, transparent 50%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.btn-back {
+    display: inline-block;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-back:hover {
+    background: #E50914;
+}
+
+.hero-header-info h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.tags-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.rating-tag {
+    background: #ffd700;
+    color: #000;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.top-badge {
+    background: #E50914;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.genres {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.genres span {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.synopsis {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-main-red {
+    background: #E50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-main-red:hover {
+    background: #b80710;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-outline:hover {
+    background: #fff;
+    color: #000;
+}
+
+.btn-favorited {
+    background: #333;
+    color: #E50914;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ===== PÁGINA TOP 10 VERTICAL ===== */
+.page-content {
+    padding: 2rem 4%;
+}
+
+.header-section {
+    margin-bottom: 2rem;
+}
+
+.header-section h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.header-section p {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+.top-list-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.top-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.rank-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #E50914;
+    text-shadow: 2px 2px 0 #000;
+    min-width: 70px;
     text-align: center;
-    padding: 30px;
-    border-top: 1px solid rgba(212,175,55,0.3);
-    color: var(--text-secondary);
-    font-size: 14px;
 }
 
-/* ===============================
-   🌙 LIGHT MODE
-================================= */
-
-body.light {
-    background: #f4f4f4;
-    color: #000;
+.top-item .card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    background: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.2s;
 }
 
-body.light .menu {
-    background: #ffffff;
-    border-bottom: 1px solid var(--gold-primary);
+.top-item .card:hover {
+    transform: scale(1.02);
 }
 
-body.light nav a {
-    color: #000;
+.top-item .card a {
+    display: flex;
+    width: 100%;
 }
 
-body.light .overlay h1 {
-    color: #000;
+.top-item .card img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.card-info {
+    padding: 1rem;
+    flex: 1;
+}
+
+.card-info .nota {
+    color: #ffd700;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.card-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.card-info p {
+    color: #aaa;
+}
+
+/* ===== PÁGINA FAVORITOS ===== */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #1f1f1f;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+}
+
+.btn-red {
+    background: #E50914;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-red:hover {
+    background: #b80710;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .navbar .nav-links {
+        justify-content: center;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .search-box input {
+        width: 100%;
+    }
+    .hero-header-info h1 {
+        font-size: 2.5rem;
+    }
+    .top-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .rank-number {
+        font-size: 2rem;
+        min-width: auto;
+    }
+    .top-item .card a {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .top-item .card img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    .hero-actions {
+        flex-direction: column;
+    }
+    .btn-main-red, .btn-outline, .btn-favorited {
+        width: 100%;
+        text-align: center;
+    }
 }
