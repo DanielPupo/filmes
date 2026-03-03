@@ -3,7 +3,7 @@ import requests
 from functools import lru_cache
 
 app = Flask(__name__)
-
+app.secret_key = 'sua_chave_secreta_aqui'  # Troque por uma chave segura em produção
 
 API_KEY = "74ef07cf4c116a3dc0ca33b1c692d3a7"
 BASE_URL = "https://api.themoviedb.org/3"
