@@ -3,7 +3,7 @@ import requests
 from functools import lru_cache
 
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta_aqui'  # Troque por uma chave segura em produção
+
 
 API_KEY = "74ef07cf4c116a3dc0ca33b1c692d3a7"
 BASE_URL = "https://api.themoviedb.org/3"
@@ -18,7 +18,6 @@ def get_movie_details(movie_id):
 
 @app.route("/")
 def index():
-    # Página inicial com a primeira página de filmes
     page = request.args.get('page', 1, type=int)
     catalogo_req = requests.get(f"{BASE_URL}/discover/movie", params={
         "api_key": API_KEY,
@@ -28,7 +27,6 @@ def index():
     })
     filmes = catalogo_req.json().get("results", [])
 
-    # Top 10 (para exibir no topo)
     top_req = requests.get(f"{BASE_URL}/movie/popular", params={
         "api_key": API_KEY,
         "language": "pt-BR",
@@ -40,7 +38,6 @@ def index():
 
 @app.route("/carregar")
 def carregar_mais():
-    # Rota AJAX para carregar mais filmes (infinite scroll)
     page = request.args.get('page', 1, type=int)
     catalogo_req = requests.get(f"{BASE_URL}/discover/movie", params={
         "api_key": API_KEY,
